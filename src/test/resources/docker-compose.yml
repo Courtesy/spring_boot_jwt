@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  jwt-db:
+    container_name: "jwt-db"
+    image: postgres:12.4
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=dbadmin
+      - POSTGRES_PASSWORD=dbAdminPass
+    ports:
+      - 15432:5432
