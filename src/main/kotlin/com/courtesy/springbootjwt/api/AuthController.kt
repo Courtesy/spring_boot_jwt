@@ -22,8 +22,9 @@ class AuthController(private val authService: AuthService, private val authentic
     }
 
     @PostMapping("/refresh")
-    fun refresh(@Valid @RequestBody refreshRequest: RefreshRequest): String {
-        return authService.generateNewAccessToken(refreshRequest.refreshToken)
+    fun refresh(@Valid @RequestBody refreshRequest: RefreshRequest): RefreshResponse {
+        val accessToken = authService.generateNewAccessToken(refreshRequest.refreshToken)
+        return RefreshResponse(accessToken)
     }
 }
 
@@ -40,4 +41,8 @@ data class LoginRequest(
 // Needs :jackson-module-kotlin dependency
 data class RefreshRequest(
         val refreshToken: String
+)
+
+data class RefreshResponse(
+        val accessToken: String
 )
